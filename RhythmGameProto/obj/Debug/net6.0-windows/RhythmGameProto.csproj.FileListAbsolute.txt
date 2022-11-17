@@ -38,3 +38,14 @@ D:\SCHOOL\Fall 2022\GameProgramming\RhythmGameProto\RhythmGameProto\obj\Debug\ne
 D:\SCHOOL\Fall 2022\GameProgramming\RhythmGameProto\RhythmGameProto\bin\Debug\net6.0-windows\Content\MushroomGuy.xnb
 D:\SCHOOL\Fall 2022\GameProgramming\RhythmGameProto\RhythmGameProto\bin\Debug\net6.0-windows\Content\TileTest1.xnb
 D:\SCHOOL\Fall 2022\GameProgramming\RhythmGameProto\RhythmGameProto\bin\Debug\net6.0-windows\Content\TileTest2.xnb
+D:\SCHOOL\Fall 2022\GameProgramming\RhythmGameProto\RhythmGameProto\bin\Debug\net6.0-windows\Content\clickTrack60bpm.wma
+D:\SCHOOL\Fall 2022\GameProgramming\RhythmGameProto\RhythmGameProto\bin\Debug\net6.0-windows\Content\clickTrack60bpm.xnb
+D:\SCHOOL\Fall 2022\GameProgramming\RhythmGameProto\RhythmGameProto\bin\Debug\net6.0-windows\Content\Synthwave2.wma
+D:\SCHOOL\Fall 2022\GameProgramming\RhythmGameProto\RhythmGameProto\bin\Debug\net6.0-windows\Content\Synthwave2.xnb
+D:\SCHOOL\Fall 2022\GameProgramming\RhythmGameProto\RhythmGameProto\bin\Debug\net6.0-windows\Content\Font1.xnb
+D:\SCHOOL\Fall 2022\GameProgramming\RhythmGameProto\RhythmGameProto\bin\Debug\net6.0-windows\Content\clickTrack82bpm.wma
+D:\SCHOOL\Fall 2022\GameProgramming\RhythmGameProto\RhythmGameProto\bin\Debug\net6.0-windows\Content\clickTrack82bpm.xnb
+D:\SCHOOL\Fall 2022\GameProgramming\RhythmGameProto\RhythmGameProto\bin\Debug\net6.0-windows\Content\MusicNoteGrey.xnb
+D:\SCHOOL\Fall 2022\GameProgramming\RhythmGameProto\RhythmGameProto\bin\Debug\net6.0-windows\Content\MusicNotePurple.xnb
+D:\SCHOOL\Fall 2022\GameProgramming\RhythmGameProto\RhythmGameProto\bin\Debug\net6.0-windows\Content\MusicNoteYellow.xnb
+D:\SCHOOL\Fall 2022\GameProgramming\RhythmGameProto\RhythmGameProto\bin\Debug\net6.0-windows\Content\EnemySkull.xnb

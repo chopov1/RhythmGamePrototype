@@ -9,23 +9,25 @@ namespace RhythmGameProto
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
-        OverlordTimer _overlordTimer;
         GridManager gridManager;
         Player player;
         Player player2;
+
+        RhythmManager rm;
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
 
-            _overlordTimer = new OverlordTimer();
             gridManager = new GridManager(this);
             Components.Add(gridManager);
             player = new Player(this, gridManager, 1);
             Components.Add(player);
-            player2 = new Player(this, gridManager, 2);
-            Components.Add(player2);
+            /*player2 = new Player(this, gridManager, 2);
+            Components.Add(player2);*/
+
+            rm = new RhythmManager(this, player);
         }
 
         protected override void Initialize()
@@ -54,7 +56,7 @@ namespace RhythmGameProto
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Black);
 
             // TODO: Add your drawing code here
 

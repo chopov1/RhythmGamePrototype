@@ -9,67 +9,71 @@ using System.Threading.Tasks;
 
 namespace RhythmGameProto
 {
-    internal class Player : Sprite
+    public class Player : GridSprite
     {
-        InputHandler input;
-        GridManager gridManager;
-        MonogameTile currentTile;
-        Vector2 gridPos;
+        InputHandler inputHandler;
+        
+        
         public int PlayerNumber;
-        public Player(Game game, GridManager gm, int playernumber) : base(game, "MushroomGuy")
+
+        public delegate void InputEventHandler();
+        public event InputEventHandler inputEvent;
+        public Player(Game game, GridManager gm, int playernumber) : base(game, gm,"MushroomGuy")
         {
             PlayerNumber = playernumber-1;
             gridPos = Vector2.Zero;
-            input = new InputHandler();
-            gridManager = gm;
+            inputHandler = new InputHandler();
+            
         }
         public override void Update(GameTime gameTime)
         {
-            base.Update(gameTime);
-            input.Update();
+            inputHandler.Update();
             getInput();
-            currentTile = gridManager.Grid[(int)gridPos.X, (int)gridPos.Y];
-            Position = currentTile.Position;
+            base.Update(gameTime);
         }
         private void getInput()
         {
-            if (input.PressedKey(input.inputKeys["Right"][PlayerNumber]))
+            if (inputHandler.PressedKey(inputHandler.inputKeys["Right"][PlayerNumber]))
             {
                 if(gridPos.X + 1 !< gridManager.gridWidth)
                 {
                     if (gridManager.Grid[(int)gridPos.X + 1, (int)gridPos.Y].IsWalkable)
                     {
                         gridPos.X++;
+                        inputEvent();
                     }
                 }
             }
-            if (input.PressedKey(input.inputKeys["Left"][PlayerNumber]))
+            if (inputHandler.PressedKey(inputHandler.inputKeys["Left"][PlayerNumber]))
             {
                 if(gridPos.X - 1 !> -1)
                 {
                     if (gridManager.Grid[(int)gridPos.X - 1, (int)gridPos.Y].IsWalkable)
                     {
                         gridPos.X--;
+                        inputEvent();
                     }
                 }
             }
-            if (input.PressedKey(input.inputKeys["Down"][PlayerNumber]))
+            if (inputHandler.PressedKey(inputHandler.inputKeys["Down"][PlayerNumber]))
             {
                 if(gridPos.Y + 1 !< gridManager.gridHeight)
                 {
                     if (gridManager.Grid[(int)gridPos.X, (int)gridPos.Y + 1].IsWalkable)
                     {
                         gridPos.Y++;
+                        inputEvent();
                     }
                 }
             }
-            if (input.PressedKey(input.inputKeys["Up"][PlayerNumber]))
+            if (inputHandler.PressedKey(inputHandler.inputKeys["Up"][PlayerNumber]))
             {
                 if(gridPos.Y - 1 !> -1)
                 {
                     if (gridManager.Grid[(int)gridPos.X, (int)gridPos.Y - 1].IsWalkable)
                     {
                         gridPos.Y--;
+                        inputEvent();
                     }
                 }
             }

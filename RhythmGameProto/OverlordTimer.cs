@@ -12,11 +12,17 @@ namespace RhythmGameProto
     {
         private System.Timers.Timer aTimer;
         public DateTime currentTime;
-        public OverlordTimer()
+        public float TIME;
+
+        float bpm;
+
+        double resetVal;
+        public OverlordTimer(float bpm)
         {
+            this.bpm = bpm;
             // Create a timer and set a two second interval.
             aTimer = new System.Timers.Timer();
-            aTimer.Interval = 5;
+            aTimer.Interval = getInterval(bpm);
 
             // Hook up the Elapsed event for the timer. 
             aTimer.Elapsed += OnTimedEvent;
@@ -25,17 +31,34 @@ namespace RhythmGameProto
             aTimer.AutoReset = true;
 
             // Start the timer
-            aTimer.Enabled = true;
+            
 
-            Debug.WriteLine("Press the Enter key to exit the program at any time... ");
-            Console.ReadLine();
+        }
+        public void StartTimer()
+        {
+            aTimer.Enabled = true;
+        }
+        private double getInterval(float bpm)
+        {
+            int div = 4;
+            double interval = Math.Round((60000/bpm)/div, 0);
+            resetVal = div;
+            Debug.WriteLine(interval);
+            return interval;
         }
        
         private void OnTimedEvent(Object source, System.Timers.ElapsedEventArgs e)
         {
-            //change this to debug writeline to check if its working
-            Debug.WriteLine("The Elapsed event was raised at {0}", e.SignalTime);
             currentTime = e.SignalTime;
+            TIME++;
+            if(TIME >= resetVal)
+            {
+                TIME = 0;
+            }
+            /*if(TIME >= float.MaxValue)
+            {
+                TIME = 0;
+            }*/
         }
     }
 }
