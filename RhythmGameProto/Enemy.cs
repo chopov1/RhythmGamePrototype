@@ -7,13 +7,12 @@ using System.Threading.Tasks;
 
 namespace RhythmGameProto
 {
-    public class Enemy : Sprite
+    public class Enemy : GridSprite
     {
-        public Enemy(Game game) : base(game, "EnemySkull")
+        public Enemy(Game game, GridManager gm) : base(game,gm,"EnemySkull")
         {
 
         }
-
 
     }
 }

@@ -140,10 +140,10 @@ namespace RhythmGameProto
                 inputRandomizer.Indicies = inputRandomizer.shuffleKeys(inputRandomizer.Indicies);
                 shuffle = false;
             }
-            foreach(var i in inputRandomizer.Indicies)
+            /*foreach(var i in inputRandomizer.Indicies)
             {
                 Debug.WriteLine($"the number at index {i} is {inputRandomizer.Indicies[i]}");
-            }
+            }*/
             /*Debug.WriteLine(" key that will move down -> " + inputRandomizer.InputKeys[inputRandomizer.Indicies[2]][PlayerNumber]);
             Debug.WriteLine(" the third number in the index list is " + inputRandomizer.Indicies[2]);*/
         }

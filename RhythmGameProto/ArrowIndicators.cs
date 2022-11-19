@@ -31,9 +31,10 @@ namespace RhythmGameProto
             leftArrow = new GridSprite(game, gm, "ArrowLeft");
             arrows.Add(leftArrow);
             bottomArrow = new GridSprite(game, gm, "ArrowDown");
-            arrows.Add(bottomArrow);
+            //had to flip top and bottom dont know why dont change
             topArrow = new GridSprite(game, gm, "ArrowUp");
             arrows.Add(topArrow);
+            arrows.Add(bottomArrow);
             setupArrows();
         }
         private void setupArrows()
@@ -50,105 +51,91 @@ namespace RhythmGameProto
         }
         public void setPositions()
         {
-            //check what key is at what index
-            //i know the direction each index points to, so I just need to find out what key
-            //it is and set that arrows pos to that tile
-            //make sure to check if tile is walkable or exists
-            for(int i =0; i < arrows.Count; i++)
+            checkKeys();
+        }
+        private void right(GridSprite arrow)
+        {
+            if (player.gridPos.X + 1! < gridManager.gridWidth)
             {
-                checkKeys(arrows[i],i);
-
+                if (gridManager.Grid[(int)player.gridPos.X + 1, (int)player.gridPos.Y].IsWalkable)
+                {
+                    arrow.gridPos = new Vector2(player.gridPos.X + 1, player.gridPos.Y);
+                    arrow.Visible = true;
+                }
+                else
+                {
+                    arrow.Visible = false;
+                }
             }
-            Debug.WriteLine("------------");
+            else
+            {
+                arrow.Visible = false;
+            }
+        }
+        private void left(GridSprite arrow)
+        {
+            if (player.gridPos.X - 1! > -1)
+            {
+                if (gridManager.Grid[(int)player.gridPos.X - 1, (int)player.gridPos.Y].IsWalkable)
+                {
+                    arrow.gridPos = new Vector2(player.gridPos.X - 1, player.gridPos.Y);
+                    arrow.Visible = true;
+                }
+                else
+                {
+                    arrow.Visible = false;
+                }
+            }
+            else
+            {
+                arrow.Visible = false;
+            }
+        }
+        private void down(GridSprite arrow)
+        {
+            if (player.gridPos.Y + 1! < gridManager.gridHeight)
+            {
+                if (gridManager.Grid[(int)player.gridPos.X, (int)player.gridPos.Y + 1].IsWalkable)
+                {
+                    arrow.gridPos = new Vector2(player.gridPos.X, player.gridPos.Y + 1);
+                    arrow.Visible = true;
+                }
+                else
+                {
+                    arrow.Visible = false;
+                }
+            }
+            else
+            {
+                arrow.Visible = false;
+            }
+        }
+        private void up(GridSprite arrow)
+        {
+            if (player.gridPos.Y - 1! > -1)
+            {
+                if (gridManager.Grid[(int)player.gridPos.X, (int)player.gridPos.Y - 1].IsWalkable)
+                {
+                    arrow.gridPos = new Vector2(player.gridPos.X, player.gridPos.Y - 1);
+                    arrow.Visible = true;
+                }
+                else
+                {
+                    arrow.Visible = false;
+                }
+            }
+            else
+            {
+                arrow.Visible = false;
+            }
         }
         //right left down up
-        private void checkKeys(GridSprite arrow, int loopCount)
+        private void checkKeys()
         {
-            Debug.WriteLine($"Arrows at {loopCount} is {arrows[loopCount].TextureName}. Indicies at {loopCount} is {player.inputRandomizer.Indicies[loopCount]}.");
-            
-            switch (player.inputRandomizer.Indicies[loopCount])
-            {
-                case 0:
-                    if (player.gridPos.X + 1! < gridManager.gridWidth)
-                    {
-                        if (gridManager.Grid[(int)player.gridPos.X + 1, (int)player.gridPos.Y].IsWalkable)
-                        {
-                            arrow.gridPos = new Vector2(player.gridPos.X + 1, player.gridPos.Y);
-                            arrow.Visible = true;
-                        }
-                        else
-                        {
-                            arrow.Visible = false;
-                        }
-                    }
-                    else
-                    {
-                        arrow.Visible = false;
-                    }
-                    break;
-                case 1:
-                    if (player.gridPos.X - 1! > -1)
-                    {
-                        if (gridManager.Grid[(int)player.gridPos.X - 1, (int)player.gridPos.Y].IsWalkable)
-                        {
-                            arrow.gridPos = new Vector2(player.gridPos.X - 1, player.gridPos.Y);
-                            arrow.Visible = true;
-                        }
-                        else
-                        {
-                            arrow.Visible = false;
-                        }
-                    }
-                    else
-                    {
-                        arrow.Visible = false;
-                    }
-                    break;
-                case 2:
-                    if (player.gridPos.Y + 1! < gridManager.gridHeight)
-                    {
-                        if (gridManager.Grid[(int)player.gridPos.X, (int)player.gridPos.Y + 1].IsWalkable)
-                        {
-                            arrow.gridPos = new Vector2(player.gridPos.X, player.gridPos.Y + 1);
-                            arrow.Visible = true;
-                        }
-                        else
-                        {
-                            arrow.Visible = false;
-                        }
-                    }
-                    else
-                    {
-                        arrow.Visible = false;
-                    }
-                    break;
-                case 3:
-                    if (player.gridPos.Y - 1! > -1)
-                    {
-                        if (gridManager.Grid[(int)player.gridPos.X, (int)player.gridPos.Y - 1].IsWalkable)
-                        {
-                            arrow.gridPos = new Vector2(player.gridPos.X, player.gridPos.Y - 1);
-                            arrow.Visible = true;
-                        }
-                        else
-                        {
-                            arrow.Visible = false;
-                        }
-                    }
-                    else
-                    {
-                        arrow.Visible = false;
-                    }
-                    break;
-            }
-        }
-
-        private void setArrows()
-        {
-            for(int i =0; i < player.inputRandomizer.Indicies.Length; i++)
-            {
-
-            }
+             right(arrows[player.inputRandomizer.Indicies[0]]);
+             left(arrows[player.inputRandomizer.Indicies[1]]);
+             down(arrows[player.inputRandomizer.Indicies[2]]);
+             up(arrows[player.inputRandomizer.Indicies[3]]);
         }
     }
 }

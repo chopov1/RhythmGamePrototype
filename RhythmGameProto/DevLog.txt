@@ -34,3 +34,6 @@ the keys in the key array move the player to when accessed from the randomized n
 
 loop through arrows
 arrow at 0 index should be equal to the direction key accessed by the 0 element of randomized number array
+
+IDEAS
+give multiplier for consecutive 1/4 beats and addition for 1/2 beats
