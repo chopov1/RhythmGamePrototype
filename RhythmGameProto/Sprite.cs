@@ -17,7 +17,7 @@ namespace RhythmGameProto
         SpriteEffects effect;
 
         Texture2D spriteTexture;
-        string TextureName;
+        public string TextureName;
         float Scale;
         public Sprite(Game game, string texturename) : base(game)
         {

@@ -10,7 +10,7 @@ namespace MacksInterestingMovement
 {
     
 
-    internal class InputHandler
+    public class InputHandler
     {
         private KeyboardState KeyboardState;
         KeyboardState prevKeyboardState;
@@ -102,6 +102,18 @@ namespace MacksInterestingMovement
                 return true;
             }
             return false;
+        }
+
+        public bool releasedAllKeys(List<Keys[]> keys, int playerNum)
+        {
+            foreach(var key in keys)
+            {
+                if (PressedKey(key[playerNum]))
+                {
+                    return false;
+                }
+            }
+            return true;
         }
 
         public bool IsHoldingKey(Keys key)

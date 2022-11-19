@@ -12,6 +12,7 @@ namespace RhythmGameProto
         GridManager gridManager;
         Player player;
         Player player2;
+        ArrowIndicators arrowIndicators;
 
         RhythmManager rm;
         public Game1()
@@ -24,6 +25,8 @@ namespace RhythmGameProto
             Components.Add(gridManager);
             player = new Player(this, gridManager, 1);
             Components.Add(player);
+            arrowIndicators = new ArrowIndicators(this, gridManager, player);
+            Components.Add(arrowIndicators);
             /*player2 = new Player(this, gridManager, 2);
             Components.Add(player2);*/
 

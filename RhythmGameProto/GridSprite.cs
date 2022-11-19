@@ -11,7 +11,7 @@ namespace RhythmGameProto
     {
         protected GridManager gridManager;
         protected MonogameTile currentTile;
-        protected Vector2 gridPos;
+        public Vector2 gridPos;
         public GridSprite(Game game, GridManager gm, string texturename) : base(game, texturename)
         {
             gridManager = gm;
@@ -22,6 +22,11 @@ namespace RhythmGameProto
             currentTile = gridManager.Grid[(int)gridPos.X, (int)gridPos.Y];
             Position = currentTile.Position;
             base.Update(gameTime);
+        }
+
+        public override void Draw(GameTime gameTime)
+        {
+            base.Draw(gameTime);
         }
     }
 }
