@@ -10,28 +10,34 @@ namespace RhythmGameProto
 {
     public class MonogameTile : Sprite
     {
-        public bool IsWalkable;
+        public bool IsWalkable { get { return tile.IsWalkable; } }
+        public TileState State { get { return tile.state; } set { tile.state = value; } }
+        public TileState prevState { get { return tile.prevTileState; } set { tile.prevTileState = value; } }
+
         Tile tile;
-        public MonogameTile(Game game, string texture, bool isWalkable) : base(game, texture)
+        public MonogameTile(Game game, string texture, bool isWalkable, Tile t) : base(game, texture)
         {
-            tile = new Tile();
-            IsWalkable = isWalkable;
+            tile = t;
+            tile.IsWalkable = isWalkable;
             Game.Components.Add(this);
         }
 
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
+            tile.tileUpdate();
         }
 
-        private void checkState()
+        public void OnTileStateChange()
         {
-            switch (tile.state)
+            tile.OnTileStateChange();
+            if (tile.IsWalkable)
             {
-                case TileState.empty:
-                    break;
-                case TileState.occupied:
-                    break;
+                //change texture to walkable
+            }
+            else
+            {
+                //change texture to unwalkable
             }
         }
         

@@ -11,7 +11,6 @@ namespace RhythmGameProto
 {
     public class InputRandomizer
     {
-        int temp;
         InputHandler inputHandler;
 
         public List<Keys[]> InputKeys;
@@ -53,12 +52,6 @@ namespace RhythmGameProto
                 arry[n] = arry[k];
                 arry[k] = temp;
             }
-            foreach (var index in arry)
-            {
-                Debug.WriteLine(arry[index]);
-            }
-            temp++;
-            Debug.WriteLine("--------" + temp.ToString());
             return arry;
         }
 

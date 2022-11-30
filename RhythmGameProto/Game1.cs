@@ -9,28 +9,16 @@ namespace RhythmGameProto
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
-        GridManager gridManager;
-        Player player;
-        Player player2;
-        ArrowIndicators arrowIndicators;
+        GameConditionManager conditionManager;
 
-        RhythmManager rm;
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
 
-            gridManager = new GridManager(this);
-            Components.Add(gridManager);
-            player = new Player(this, gridManager, 1);
-            Components.Add(player);
-            arrowIndicators = new ArrowIndicators(this, gridManager, player);
-            Components.Add(arrowIndicators);
-            /*player2 = new Player(this, gridManager, 2);
-            Components.Add(player2);*/
-
-            rm = new RhythmManager(this, player);
+            conditionManager = new GameConditionManager(this);
+            Components.Add(conditionManager);
         }
 
         protected override void Initialize()

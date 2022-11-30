@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,21 +11,25 @@ namespace RhythmGameProto
     public enum TileState { empty, occupied}
     public class Tile
     {
+        public bool IsWalkable;
         public TileState state;
-        public Tile()
+        public TileState prevTileState;
+        public Vector2 tilePos;
+         
+        public Tile(Vector2 pos)
         {
+            tilePos = pos;
             state = TileState.empty;
         }
 
-        public void tileUpdate()
+        public virtual void OnTileStateChange()
         {
-            switch (state)
-            {
-                case TileState.empty:
-                    break;
-                case TileState.occupied:
-                    break;
-            }
+            prevTileState = state;
+        }
+
+        public virtual void tileUpdate()
+        {
+            
         }
     }
 }

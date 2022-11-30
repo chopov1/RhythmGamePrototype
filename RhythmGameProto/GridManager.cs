@@ -50,10 +50,10 @@ namespace RhythmGameProto
                     switch (num)
                     {
                         default:
-                            t = new MonogameTile(Game, testTile1, true);
+                            t = new MonogameTile(Game, testTile1, true, new Tile(pos));
                             break;
                         case 6:
-                            t = new MonogameTile(Game, testTile2, false);
+                            t = new MonogameTile(Game, testTile2, false, new Tile(pos));
                             break;
                     }
                     t.Position = pos;
@@ -63,7 +63,14 @@ namespace RhythmGameProto
             return grid;
         }
         
-
+        public bool isWalkable(Vector2 gridPos)
+        {
+            if (Grid[(int)gridPos.X, (int)gridPos.Y].IsWalkable)
+            {
+                return true;
+            }
+            return false;
+        }
         
     }
 }

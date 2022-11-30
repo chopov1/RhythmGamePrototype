@@ -13,8 +13,6 @@ namespace RhythmGameProto
     {
         InputHandler inputHandler;
         public InputRandomizer inputRandomizer;
-
-        
         public int PlayerNumber;
 
         public delegate void InputEventHandler();
@@ -22,15 +20,17 @@ namespace RhythmGameProto
         public Player(Game game, GridManager gm, int playernumber) : base(game, gm,"MushroomGuy")
         {
             PlayerNumber = playernumber-1;
-            gridPos = Vector2.Zero;
+            gridPos = new Vector2(2, 2);
             inputHandler = new InputHandler();
             inputRandomizer = new InputRandomizer(inputHandler);
+            SpriteState = SpriteState.Active;
         }
         public override void Update(GameTime gameTime)
         {
             inputHandler.Update();
             getRandomInput();
             base.Update(gameTime);
+            //stateUpdate();
         }
         #region regular input
         private void getNormalInput()
@@ -82,6 +82,12 @@ namespace RhythmGameProto
         }
         #endregion
 
+        public void ResetPlayer()
+        {
+            
+            SpriteState = SpriteState.Active;
+        }
+
         //right left down up
         bool shuffle;
         private void getRandomInput()
@@ -93,6 +99,7 @@ namespace RhythmGameProto
                 {
                     if (gridManager.Grid[(int)gridPos.X + 1, (int)gridPos.Y].IsWalkable)
                     {
+                        changeTileOccupation();
                         gridPos.X++;
                         inputEvent();
                         shuffle = true;
@@ -105,6 +112,7 @@ namespace RhythmGameProto
                 {
                     if (gridManager.Grid[(int)gridPos.X - 1, (int)gridPos.Y].IsWalkable)
                     {
+                        changeTileOccupation();
                         gridPos.X--;
                         inputEvent();
                         shuffle = true;
@@ -117,6 +125,7 @@ namespace RhythmGameProto
                 {
                     if (gridManager.Grid[(int)gridPos.X, (int)gridPos.Y + 1].IsWalkable)
                     {
+                        changeTileOccupation();
                         gridPos.Y++;
                         inputEvent();
                         shuffle = true;
@@ -129,6 +138,7 @@ namespace RhythmGameProto
                 {
                     if (gridManager.Grid[(int)gridPos.X, (int)gridPos.Y - 1].IsWalkable)
                     {
+                        changeTileOccupation();
                         gridPos.Y--;
                         inputEvent();
                         shuffle = true;
@@ -140,12 +150,6 @@ namespace RhythmGameProto
                 inputRandomizer.Indicies = inputRandomizer.shuffleKeys(inputRandomizer.Indicies);
                 shuffle = false;
             }
-            /*foreach(var i in inputRandomizer.Indicies)
-            {
-                Debug.WriteLine($"the number at index {i} is {inputRandomizer.Indicies[i]}");
-            }*/
-            /*Debug.WriteLine(" key that will move down -> " + inputRandomizer.InputKeys[inputRandomizer.Indicies[2]][PlayerNumber]);
-            Debug.WriteLine(" the third number in the index list is " + inputRandomizer.Indicies[2]);*/
         }
     }
 }

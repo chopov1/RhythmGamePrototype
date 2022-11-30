@@ -38,6 +38,12 @@ namespace RhythmGameProto
         {
             aTimer.Enabled = true;
         }
+
+        public void StopTimer()
+        {
+            aTimer.Enabled = false;
+            TIME = 0;
+        }
         private double getInterval(float bpm)
         {
             int div = 4;
@@ -55,10 +61,6 @@ namespace RhythmGameProto
             {
                 TIME = 0;
             }
-            /*if(TIME >= float.MaxValue)
-            {
-                TIME = 0;
-            }*/
         }
     }
 }

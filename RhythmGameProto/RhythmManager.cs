@@ -6,9 +6,12 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Media;
 using Microsoft.Xna.Framework.Graphics;
+using System.Diagnostics;
+using SharpDX.XAudio2;
 
 namespace RhythmGameProto
 {
+
     public class RhythmManager : DrawableGameComponent
     {
         public float bpm;
@@ -28,6 +31,9 @@ namespace RhythmGameProto
         Texture2D halfNote;
         SpriteBatch spriteBatch;
         Player player;
+
+        public delegate void RhythmEventHandler();
+        public event RhythmEventHandler OnBeat;
 
         public RhythmManager(Game game, Player player) : base(game)
         {
@@ -50,19 +56,38 @@ namespace RhythmGameProto
             noteTexture = offbeatNote;
             spriteBatch = new SpriteBatch(Game.GraphicsDevice);
             setupMusicAndTimer();
-            startMusicAndTimer();
         }
-
+        public override void Initialize()
+        {
+            base.Initialize();
+        }
         private void setupMusicAndTimer()
         {
             song = Game.Content.Load<Song>(songname);
             timer = new OverlordTimer(bpm);
         }
 
+        bool hasStarted;
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
-            
+            checkForBeat();
+            //initialize function results in music and timer out of sync
+            if(hasStarted == false)
+            {
+                startMusicAndTimer();
+            }
+        }
+
+        private void checkForBeat()
+        {
+            if(timer.TIME == 0)
+            {
+                if(OnBeat != null)
+                {
+                    OnBeat();
+                }
+            }
         }
 
         private void changeNoteTexture()
@@ -81,10 +106,20 @@ namespace RhythmGameProto
                     break;
             }
         }
-        private void startMusicAndTimer()
+
+        //maybe make this into a state and check on update weather we need to start or stop the song/timer
+        //then these methods can be private again
+        public void startMusicAndTimer()
         {
             MediaPlayer.Play(song);
             timer.StartTimer();
+            hasStarted = true;
+        }
+
+        public void stopMusicAndTimer()
+        {
+            MediaPlayer.Stop();
+            timer.StopTimer();
         }
 
         private void checkInputAccuracy()

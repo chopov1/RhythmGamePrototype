@@ -37,3 +37,6 @@ arrow at 0 index should be equal to the direction key accessed by the 0 element 
 
 IDEAS
 give multiplier for consecutive 1/4 beats and addition for 1/2 beats
+
+TODO
+I need to write a good pathfinding system for enemies. go around unwalkable tiles
